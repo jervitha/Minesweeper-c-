@@ -12,8 +12,6 @@ Game::Game(int size) {
 
 void Game::StartGame() {
   GenerateCell();
-  GenerateMines();
-  GenerateNumbers();
   board->DrawBoard(cells);
   Update();
 }
@@ -22,9 +20,10 @@ void Game::Update() {
   while (!isGameLoss && !isGameWin) {
     int x, y;
     bool isFlag = input->GetInput(x, y, size, cells);
-
+  
     if (IsFirstMove()) {
       GenerateMinesExcluding(x, y);
+      GenerateNumbers();
       SetFirstMove(false);
     }
 
